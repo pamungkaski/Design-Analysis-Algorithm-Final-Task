@@ -11,13 +11,12 @@
 using namespace std;
 void cutVectorIntoTwo(vector<int> input, vector<int> &v, vector<int> &w) {
     int n = input.size() / 2;
-    int m = input.size() - n;
-    v = input;
-    w = input;
-    v.resize(n);
-    reverse(w.begin(), w.end());
-    w.resize(m);
-    reverse(w.begin(), w.end());
+    for (int i = 0; i < n; ++i) {
+        v.push_back(input[i]);
+    }
+    for (int i = n; i < input.size(); ++i) {
+        w.push_back(input[i]);
+    }
 }
 vector<int> add(vector<int> v, vector<int> w){
     int64_t carry = 0;
@@ -64,12 +63,17 @@ vector<int> add(vector<int> v, vector<int> w){
 }
 vector<int> decrease(vector<int> v, vector<int> w) {
     int64_t sum;
+    vector <int> x, y;
+    x = v;
+    y = w;
     while(w.size() < v.size()){
         w.push_back(0);
     }
     while(v.size() < w.size()){
         v.push_back(0);
     }
+    w.push_back(0);
+    v.push_back(0);
     for (int64_t i = 0; i < w.size() ; ++i) {
         if (v[i] < w[i]) {
             v[i] = v[i] + 10;
@@ -100,7 +104,7 @@ vector<int> karatsuba(vector<int> numOne, vector<int> numTwo) {
         return numOne.size() > numTwo.size() ? multiply(numOne, numTwo[0]) : multiply(numTwo, numOne[0]);
     } else {
         int n = numOne.size() > numTwo.size()? numOne.size()  / 2 : numTwo.size() / 2;
-        vector <int> numOneFirstHalf, numOneSecondHalf, numTwoFirstHalf, numTwoSecondHalf, x1, x2, x3, middle, damnedNumber;
+        vector <int> numOneFirstHalf, numOneSecondHalf, numTwoFirstHalf, numTwoSecondHalf, x1, x2, x3, middle, damnedNumber, tmp;
         cutVectorIntoTwo(numOne, numOneSecondHalf, numOneFirstHalf);
         cutVectorIntoTwo(numTwo, numTwoSecondHalf, numTwoFirstHalf);
         x1 = karatsuba(numOneFirstHalf, numTwoFirstHalf);
@@ -114,7 +118,8 @@ vector<int> karatsuba(vector<int> numOne, vector<int> numTwo) {
         for (int j = 0; j < n; ++j) {
             middle.insert(middle.begin(), 0);
         }
-        return add(add(x1, middle), x3);
+        tmp = add(x1, middle);
+        return add(tmp, x3);
     }
 }
 int main() {
@@ -123,6 +128,9 @@ int main() {
     vector <int> secondNumber;
     vector <int> result;
     cin >> s1 >> s2;
+
+    cout << "First Number digit(s): "<< s1.size() << " digit(s)" <<endl;
+    cout << "Second Number digit(s): "<< s2.size() << " digit(s)" <<endl;
     for (int i = 0; i < s1.size(); ++i) {
         firstNumber.insert(firstNumber.begin(), s1[i] - '0');
     }
@@ -136,6 +144,6 @@ int main() {
         cout << result[j];
     }
     cout << endl;
-
+    cout << result.size() << " digit(s)" <<endl;
     return 0;
 }
