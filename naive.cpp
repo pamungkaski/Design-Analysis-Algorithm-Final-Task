@@ -8,13 +8,13 @@
 
 using namespace std;
 
-void add(vector<int> &v,vector<int> &w){
+void add(vector<int> &v, vector<int> &w){
     uint64_t carry = 0;
     uint64_t sum;
-    while(w.size()<v.size()){
+    while(w.size() < v.size()){
         w.push_back(0);
     }
-    for (uint64_t i = 0; i <w.size() ; ++i) {
+    for (uint64_t i = 0; i < w.size() ; ++i) {
         sum = v[i]+w[i] + carry;
         v[i] = sum % 10;
         carry =  sum /10;
@@ -67,5 +67,7 @@ int main() {
         cout << result[j];
     }
     cout << endl;
+    cout << "First Number digit(s): "<< s1.size() << " digit(s)" <<endl;
+    cout << "Second Number digit(s): "<< s2.size() << " digit(s)" <<endl;
     cout << result.size() << " digit(s)" <<endl;
 }
