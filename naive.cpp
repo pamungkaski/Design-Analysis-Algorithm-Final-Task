@@ -70,4 +70,6 @@ int main() {
     cout << "First Number digit(s): "<< s1.size() << " digit(s)" <<endl;
     cout << "Second Number digit(s): "<< s2.size() << " digit(s)" <<endl;
     cout << result.size() << " digit(s)" <<endl;
+
+    return 0;
 }

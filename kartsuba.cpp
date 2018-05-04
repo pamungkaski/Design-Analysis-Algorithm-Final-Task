@@ -119,13 +119,15 @@ vector<int> karatsuba(vector<int> numOne, vector<int> numTwo) {
 }
 int main() {
     string s1, s2;
-    vector <int> firstNumber, secondNumber, result;
+    vector <int> firstNumber;
+    vector <int> secondNumber;
+    vector <int> result;
     cin >> s1 >> s2;
     for (int i = 0; i < s1.size(); ++i) {
         firstNumber.insert(firstNumber.begin(), s1[i] - '0');
     }
-    for (int i = 0; i < s2.size(); ++i) {
-        secondNumber.insert(secondNumber.begin(), s2[i] - '0');
+    for (int j = 0; j < s2.size(); ++j) {
+        secondNumber.insert(secondNumber.begin(), s2[j] - '0');
     }
     result = karatsuba(firstNumber, secondNumber);
     reverse(result.begin(), result.end());
@@ -134,4 +136,6 @@ int main() {
         cout << result[j];
     }
     cout << endl;
+
+    return 0;
 }
